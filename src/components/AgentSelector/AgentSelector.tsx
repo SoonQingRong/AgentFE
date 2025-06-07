@@ -21,11 +21,21 @@ const AgentSelectorPrompt: React.FC = () => {
   }, []);
 
   return (
-    <Box sx={{ p: 4 }}>
-      <Typography variant="h6" gutterBottom>
-        {displayedText}
-      </Typography>
-      {showDropdown && <AgentSelectorDropDown />}
+    <Box
+      sx={{
+        padding: "4px",
+      }}
+    >
+      <Box>
+        <Typography variant="h6" gutterBottom>
+          {displayedText}
+        </Typography>
+      </Box>
+      {showDropdown && (
+        <Box>
+          <AgentSelectorDropDown />
+        </Box>
+      )}
     </Box>
   );
 };

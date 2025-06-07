@@ -13,7 +13,7 @@ const TabsNavigation: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
+    <Container maxWidth="sm" sx={{ marginTop: "20px" }}>
       <Tabs
         value={tabIndex}
         onChange={handleTabChange}
@@ -58,7 +58,7 @@ const TabsNavigation: React.FC = () => {
         />
       </Tabs>
 
-      <Box sx={{ mt: 3 }}>
+      <Box sx={{ marginTop: "10px" }}>
         {tabIndex === 0 && <AboutPage />}
         {tabIndex === 1 && <AgentSelector />}
         {tabIndex === 2 && <AlternatePage />}
