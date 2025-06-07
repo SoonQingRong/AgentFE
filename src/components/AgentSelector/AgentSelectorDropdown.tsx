@@ -6,11 +6,11 @@ import {
   InputLabel,
   SelectChangeEvent,
 } from "@mui/material";
-import theme from "../theme";
+import theme from "../../theme";
 
 const agentOptions = ["MPS", "APG", "SAB"];
 
-const AgentSelector: React.FC = () => {
+const AgentSelectorDropDown: React.FC = () => {
   const [agent, setAgent] = useState<string>("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -79,5 +79,4 @@ const AgentSelector: React.FC = () => {
     </FormControl>
   );
 };
-
-export default AgentSelector;
+export default AgentSelectorDropDown;

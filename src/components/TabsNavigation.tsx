@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Box, Container } from "@mui/material";
 import AboutPage from "./AboutPage";
-import AgentSelector from "./AgentSelector";
+import AgentSelector from "./AgentSelector/AgentSelector";
 import AlternatePage from "./AlternatePage";
 import theme from "../theme";
 
