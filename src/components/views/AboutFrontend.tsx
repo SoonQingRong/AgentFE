@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import theme from "../../theme";
 
-const AboutView = () => {
+const AboutFrontend = () => {
   return (
     <Box
       sx={{
@@ -19,4 +19,4 @@ const AboutView = () => {
   );
 };
 
-export default AboutView;
+export default AboutFrontend;

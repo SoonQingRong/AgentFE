@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import theme from "../../theme";
 
-const AlternatePageView = () => {
+const MPSFrontend = () => {
   return (
     <Box
       sx={{
@@ -13,10 +13,10 @@ const AlternatePageView = () => {
       }}
     >
       <Typography sx={{ fontSize: 50, color: theme.palette.text.primary }}>
-        TS Frontend
+        TS-MPS Frontend
       </Typography>
     </Box>
   );
 };
 
-export default AlternatePageView;
+export default MPSFrontend;
