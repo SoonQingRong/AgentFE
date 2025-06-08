@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import theme from "../theme";
 
-const agentOptions = ["MPS", "APG", "SAB"];
+const agentOptions = ["APG", "MPS", "SAB"];
 
 const AgentSelectorDropDown: React.FC = () => {
   const [agent, setAgent] = useState<string>("");

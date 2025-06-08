@@ -6,8 +6,7 @@ const AboutFrontend = () => {
     <Box
       sx={{
         padding: "30px",
-        maxWidth: 600,
-        margin: "auto",
+        width: "600px",
         backgroundColor: theme.palette.primary.dark,
         color: "text.primary",
       }}
