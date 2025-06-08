@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Container, Drawer } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import TabsNavigation from "../components/TabsNavigation";
 import AboutFrontend from "../components/views/AboutFrontend";
 import APGFrontend from "../components/views/APGFrontend";
