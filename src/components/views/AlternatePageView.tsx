@@ -1,11 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import theme from "../theme";
+import theme from "../../theme";
 
-const AlternatePage = () => {
+const AlternatePageView = () => {
   return (
     <Box
       sx={{
-        height: 500,
+        height: "500px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -19,4 +19,4 @@ const AlternatePage = () => {
   );
 };
 
-export default AlternatePage;
+export default AlternatePageView;

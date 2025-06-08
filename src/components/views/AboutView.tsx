@@ -1,11 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import theme from "../theme";
+import theme from "../../theme";
 
-const AboutPage = () => {
+const AboutView = () => {
   return (
     <Box
       sx={{
-        padding: 4,
+        padding: "30px",
         maxWidth: 600,
         margin: "auto",
         backgroundColor: theme.palette.primary.dark,
@@ -19,4 +19,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default AboutView;

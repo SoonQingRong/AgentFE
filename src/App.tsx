@@ -1,8 +1,8 @@
 import React from "react";
-import TabsNavigation from "./components/TabsNavigation";
+import MainPage from "./pages/MainPage";
 
 const App: React.FC = () => {
-  return <TabsNavigation />;
+  return <MainPage />;
 };
 
 export default App;

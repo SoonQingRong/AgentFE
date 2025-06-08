@@ -6,7 +6,7 @@ import {
   InputLabel,
   SelectChangeEvent,
 } from "@mui/material";
-import theme from "../../theme";
+import theme from "../theme";
 
 const agentOptions = ["MPS", "APG", "SAB"];
 

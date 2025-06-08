@@ -1,36 +1,44 @@
-import React, { useState } from "react";
-import { Tabs, Tab, Box, Container } from "@mui/material";
-import AboutPage from "./AboutPage";
-import AgentSelector from "./AgentSelector/AgentSelector";
-import AlternatePage from "./AlternatePage";
+import React from "react";
+import { Tabs, Tab } from "@mui/material";
 import theme from "../theme";
 
-const TabsNavigation: React.FC = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+interface TabItem {
+  label: string;
+  value: number | string;
+}
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabIndex(newValue);
-  };
+interface TabsNavaigationProps {
+  value: number | string;
+  onChange: (event: React.SyntheticEvent, newValue: number | string) => void;
+  tabs: TabItem[];
+}
 
+const TabsNavigation: React.FC<TabsNavaigationProps> = ({
+  value,
+  onChange,
+  tabs,
+}) => {
   return (
-    <Container maxWidth="sm" sx={{ marginTop: "20px" }}>
-      <Tabs
-        value={tabIndex}
-        onChange={handleTabChange}
-        centered
-        sx={{
-          "& .MuiTab-root": {
-            color: theme.palette.text.primary,
-            textTransform: "none",
-          }, //tab text
+    <Tabs
+      value={value}
+      onChange={onChange}
+      centered
+      sx={{
+        "& .MuiTab-root": {
+          color: theme.palette.text.primary,
+          textTransform: "none",
+        }, //tab text
 
-          "& .MuiTabs-indicator": {
-            backgroundColor: theme.palette.secondary.main,
-          }, //indicator line under tab
-        }}
-      >
+        "& .MuiTabs-indicator": {
+          backgroundColor: theme.palette.secondary.main,
+        }, //indicator line under tab
+      }}
+    >
+      {tabs.map((tab) => (
         <Tab
-          label="About"
+          key={tab.value}
+          label={tab.label}
+          value={tab.value}
           sx={{
             "&.Mui-selected": {
               color: theme.palette.text.secondary,
@@ -38,32 +46,8 @@ const TabsNavigation: React.FC = () => {
             }, //text when tab is selected
           }}
         />
-        <Tab
-          label="Agent Selector"
-          sx={{
-            "&.Mui-selected": {
-              color: theme.palette.text.secondary,
-              textTransform: "none",
-            },
-          }}
-        />
-        <Tab
-          label="TS Frontend"
-          sx={{
-            "&.Mui-selected": {
-              color: theme.palette.text.secondary,
-              textTransform: "none",
-            },
-          }}
-        />
-      </Tabs>
-
-      <Box sx={{ marginTop: "10px" }}>
-        {tabIndex === 0 && <AboutPage />}
-        {tabIndex === 1 && <AgentSelector />}
-        {tabIndex === 2 && <AlternatePage />}
-      </Box>
-    </Container>
+      ))}
+    </Tabs>
   );
 };
 
