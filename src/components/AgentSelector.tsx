@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Typography, Box } from "@mui/material";
 import AgentSelectorDropDown from "./AgentSelectorDropdown";
 
-const AgentSelector: React.FC = () => {
+interface AgentSelectorProps {
+  agentOptions: string[];
+}
+
+const AgentSelector: React.FC<AgentSelectorProps> = ({ agentOptions }) => {
   const prompt = "Hi, please select your agent";
   const [displayedText, setDisplayedText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -33,7 +37,7 @@ const AgentSelector: React.FC = () => {
       </Box>
       {showDropdown && (
         <Box>
-          <AgentSelectorDropDown />
+          <AgentSelectorDropDown agentOptions={agentOptions} />
         </Box>
       )}
     </Box>

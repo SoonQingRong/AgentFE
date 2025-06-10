@@ -7,10 +7,13 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import theme from "../theme";
+interface AgentSelectorDropdownProps {
+  agentOptions: string[];
+}
 
-const agentOptions = ["APG", "MPS", "SAB"];
-
-const AgentSelectorDropDown: React.FC = () => {
+const AgentSelectorDropDown: React.FC<AgentSelectorDropdownProps> = ({
+  agentOptions,
+}) => {
   const [agent, setAgent] = useState<string>("");
 
   const handleChange = (event: SelectChangeEvent) => {
