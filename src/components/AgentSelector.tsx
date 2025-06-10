@@ -3,11 +3,12 @@ import { Typography, Box } from "@mui/material";
 import AgentSelectorDropDown from "./AgentSelectorDropdown";
 
 interface AgentSelectorProps {
+  prompt: string;
   agentOptions: string[];
 }
 
-const AgentSelector: React.FC<AgentSelectorProps> = ({ agentOptions }) => {
-  const prompt = "Hi, please select your agent";
+const AgentSelector: React.FC<AgentSelectorProps> = ({ prompt, agentOptions }) => {
+
   const [displayedText, setDisplayedText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 

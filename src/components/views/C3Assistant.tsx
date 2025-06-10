@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import AgentSelector from "../AgentSelector";
 
+const prompt = "Hi, please select your agent";
 const agentOptions = ["APG", "MPS", "SAB"];
 
 const C3Assistant: React.FC = () => {
@@ -10,7 +11,7 @@ const C3Assistant: React.FC = () => {
       <Typography variant="h5" gutterBottom>
         Welcome to C3 Assistant
       </Typography>
-      <AgentSelector agentOptions={agentOptions} />
+      <AgentSelector prompt={prompt} agentOptions={agentOptions} />
     </Box>
   );
 };
