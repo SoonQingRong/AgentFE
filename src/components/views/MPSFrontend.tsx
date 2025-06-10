@@ -5,8 +5,8 @@ const MPSFrontend = () => {
   return (
     <Box
       sx={{
-        height: "600px",
-        width: "1200px",
+        height: "750px",
+        width: "1500px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

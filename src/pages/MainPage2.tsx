@@ -53,7 +53,7 @@ const MainPage2: React.FC = () => {
         </Tabs>
       </Box>
 
-      <Box display="flex" overflow="hidden">
+      <Box display="flex" overflow="hidden" sx={{ justifyContent: "center" }}>
         <Box>
           {tabValue === 0 && <AboutFrontend />}
           {tabValue === 1 && <APGFrontend />}
