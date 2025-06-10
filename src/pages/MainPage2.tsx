@@ -19,7 +19,7 @@ const MainPage2: React.FC = () => {
   const [tabValue, setTabValue] = useState<number | string>(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleLeftTabChange = (
+  const handleTabChange = (
     event: React.SyntheticEvent,
     newValue: number | string
   ) => {
@@ -36,7 +36,7 @@ const MainPage2: React.FC = () => {
       >
         <TabsNavigation
           value={tabValue}
-          onChange={handleLeftTabChange}
+          onChange={handleTabChange}
           tabs={tabs}
         />
         <Tabs value={false}>
