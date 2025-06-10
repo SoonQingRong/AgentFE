@@ -26,10 +26,10 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ marginTop: "20px" }}>
+    <Container>
       <TabsNavigation value={tabValue} onChange={handleTabChange} tabs={tabs} />
 
-      <Box sx={{ marginTop: "10px" }}>
+      <Box sx={{ marginTop: "10px", justifyItems: "center" }}>
         {tabValue === 0 && <AboutFrontend />}
         {tabValue === 1 && <APGFrontend />}
         {tabValue === 2 && <MPSFrontend />}
