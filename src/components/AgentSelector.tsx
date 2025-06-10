@@ -7,8 +7,10 @@ interface AgentSelectorProps {
   agentOptions: string[];
 }
 
-const AgentSelector: React.FC<AgentSelectorProps> = ({ prompt, agentOptions }) => {
-
+const AgentSelector: React.FC<AgentSelectorProps> = ({
+  prompt,
+  agentOptions,
+}) => {
   const [displayedText, setDisplayedText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -23,7 +25,7 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({ prompt, agentOptions }) =
       }
     }, 10);
     return () => clearInterval(interval);
-  }, []);
+  }, [prompt]);
 
   return (
     <Box
