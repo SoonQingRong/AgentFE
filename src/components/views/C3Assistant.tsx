@@ -3,6 +3,10 @@ import { Box, Typography } from "@mui/material";
 import AgentSelector from "../AgentSelector";
 import AgentRoleSelector from "../AgentRoleSelector";
 
+interface C3AssistantProps{
+  sidebarDelayInSeconds: number;
+}
+
 const agentSelectionPrompt = "Hi, please select your agent";
 const agentOptions = ["APG", "MPS", "SAB"];
 
@@ -13,7 +17,7 @@ const rolesByAgent: Record<string, string[]> = {
   SAB: ["SAB1", "SAB2", "SAB3"],
 };
 
-const C3Assistant: React.FC = () => {
+const C3Assistant: React.FC<C3AssistantProps> = ({sidebarDelayInSeconds}) => {
   const [selectedAgent, setSelectedAgent] = useState<string>("");
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
 
@@ -28,6 +32,7 @@ const C3Assistant: React.FC = () => {
       </Typography>
       <AgentSelector
         prompt={agentSelectionPrompt}
+        sidebarDelayInSeconds={sidebarDelayInSeconds}
         agentOptions={agentOptions}
         onAgentChange={setSelectedAgent}
       />
