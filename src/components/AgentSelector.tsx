@@ -33,7 +33,7 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
           clearInterval(interval);
           setTimeout(() => setShowDropdown(true), 300); // delay dropdown
         }
-      }, 10);
+      }, 20);
     }, animationDelay);
     return () => {
       clearTimeout(timeout);
