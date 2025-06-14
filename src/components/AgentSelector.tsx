@@ -5,11 +5,13 @@ import AgentSelectorDropDown from "./AgentSelectorDropdown";
 interface AgentSelectorProps {
   prompt: string;
   agentOptions: string[];
+  onAgentChange: (agent: string) => void;
 }
 
 const AgentSelector: React.FC<AgentSelectorProps> = ({
   prompt,
   agentOptions,
+  onAgentChange,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -40,7 +42,10 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
       </Box>
       {showDropdown && (
         <Box>
-          <AgentSelectorDropDown agentOptions={agentOptions} />
+          <AgentSelectorDropDown
+            agentOptions={agentOptions}
+            onAgentChange={onAgentChange}
+          />
         </Box>
       )}
     </Box>

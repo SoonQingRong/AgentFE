@@ -9,15 +9,19 @@ import {
 import theme from "../theme";
 interface AgentSelectorDropdownProps {
   agentOptions: string[];
+  onAgentChange: (agent: string) => void;
 }
 
 const AgentSelectorDropDown: React.FC<AgentSelectorDropdownProps> = ({
   agentOptions,
+  onAgentChange
 }) => {
   const [agent, setAgent] = useState<string>("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAgent(event.target.value as string);
+    const selectedAgent = event.target.value as string
+    setAgent(selectedAgent);
+    onAgentChange(selectedAgent);
   };
 
   return (

@@ -18,12 +18,20 @@ const MainPage2: React.FC = () => {
 
   const [tabValue, setTabValue] = useState<number | string>(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [agentAssistantKey, setAgentAssistantKey] = useState(0);
 
   const handleTabChange = (
     event: React.SyntheticEvent,
     newValue: number | string
   ) => {
     setTabValue(newValue);
+  };
+
+  const handleSidebarClick = () => {
+    if (!sidebarOpen) {
+      setAgentAssistantKey((prev) => prev + 1); // triggers reset and remount
+    }
+    setSidebarOpen((prev) => !prev);
   };
 
   return (
@@ -47,7 +55,7 @@ const MainPage2: React.FC = () => {
         <Tabs value={false}>
           <Tab
             label="C3 Assistant"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+            onClick={handleSidebarClick}
             sx={{
               textTransform: "none",
               color: sidebarOpen
@@ -79,7 +87,7 @@ const MainPage2: React.FC = () => {
             zIndex: 1300,
           }}
         >
-          <C3Assistant />
+          <C3Assistant key={agentAssistantKey} />
         </Box>
       </Box>
     </Box>
