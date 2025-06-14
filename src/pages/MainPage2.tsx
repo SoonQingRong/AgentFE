@@ -27,7 +27,12 @@ const MainPage2: React.FC = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" height="100vh">
+    <Box
+      display="flex"
+      flexDirection="column"
+      height="100vh"
+      sx={{ overflowX: "hidden", position: "relative" }}
+    >
       <Box
         display="flex"
         justifyContent="space-between"
@@ -61,21 +66,21 @@ const MainPage2: React.FC = () => {
           {tabValue === 3 && <SABFrontend />}
         </Box>
 
-        {sidebarOpen && (
-          <Box
-            sx={{
-              background: theme.palette.background.default,
-              border: `1px solid ${theme.palette.primary.main}`,
-              position: "absolute",
-              right: "0px",
-              width: "400px",
-              height: "calc(100% - 58px)", // component height is 48px and margin bottom is 10px
-              zIndex: 1300,
-            }}
-          >
-            <C3Assistant />
-          </Box>
-        )}
+        <Box
+          sx={{
+            background: theme.palette.background.default,
+            border: `1px solid ${theme.palette.primary.main}`,
+            position: "absolute",
+            right: "0px",
+            width: "400px",
+            height: "calc(100% - 58px)", // component height is 48px and margin bottom is 10px
+            transition: "transform 0.5s ease-in-out",
+            transform: sidebarOpen ? "translateX(0)" : "translateX(100%)",
+            zIndex: 1300,
+          }}
+        >
+          <C3Assistant />
+        </Box>
       </Box>
     </Box>
   );
