@@ -6,16 +6,17 @@ import AgentRoleConfirmationButton from "./AgentRoleConfirmButton";
 interface AgentRoleSelectorProps {
   prompt: string;
   roles: string[];
-  onProceed: (selectedRoles: string[]) => void;
+  onConfirm: (selectedRoles: string[]) => void;
 }
 
 const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
   prompt,
   roles,
-  onProceed,
+  onConfirm,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [showCheckboxes, setShowCheckboxes] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
 
   useEffect(() => {
     let index = 0;
@@ -42,9 +43,11 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
         <Box>
           {roles.map((role) => (
             <AgentRoleCheckbox
+              key={role}
               role={role}
               checkedRoles={checkedRoles}
               setCheckedRoles={setCheckedRoles}
+              disabled={buttonClicked}
             />
           ))}
         </Box>
@@ -53,8 +56,12 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
       {showCheckboxes && (
         <Box sx={{ marginTop: "10px" }}>
           <AgentRoleConfirmationButton
-            onProceed={onProceed}
+            onConfirm={(roles) => {
+              setButtonClicked(true);
+              onConfirm(roles);
+            }}
             checkedRoles={checkedRoles}
+            disabled={checkedRoles.length === 0 || buttonClicked}
           />
         </Box>
       )}

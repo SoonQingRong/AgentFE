@@ -6,12 +6,14 @@ interface agentRoleCheckboxProps {
   role: string;
   checkedRoles: string[];
   setCheckedRoles: React.Dispatch<React.SetStateAction<string[]>>;
+  disabled: boolean;
 }
 
 const AgentRoleCheckbox: React.FC<agentRoleCheckboxProps> = ({
   role,
   checkedRoles,
   setCheckedRoles,
+  disabled,
 }) => {
   const toggleRole = (role: string) => {
     setCheckedRoles((prev) =>
@@ -26,6 +28,7 @@ const AgentRoleCheckbox: React.FC<agentRoleCheckboxProps> = ({
         <Checkbox
           checked={checkedRoles.includes(role)}
           onChange={() => toggleRole(role)}
+          disabled={disabled}
           sx={{
             color: theme.palette.primary.light,
             "&.Mui-checked": {
@@ -34,10 +37,19 @@ const AgentRoleCheckbox: React.FC<agentRoleCheckboxProps> = ({
             "&:hover": {
               color: theme.palette.secondary.main,
             },
+            "&.Mui-disabled": {
+              color: theme.palette.primary.light,
+            },
           }}
         />
       }
       label={role}
+      disabled={disabled}
+      sx={{
+        "&.Mui-disabled .MuiTypography-root": {
+          color: theme.palette.text.primary,
+        },
+      }}
     />
   );
 };

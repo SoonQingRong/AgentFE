@@ -2,18 +2,23 @@ import { Button } from "@mui/material";
 import theme from "../theme";
 
 interface agentRoleConfirmationButtonProps {
-  onProceed: (selectedRoles: string[]) => void;
+  onConfirm: (selectedRoles: string[]) => void;
   checkedRoles: string[];
+  disabled: boolean;
 }
 
 const AgentRoleConfirmationButton: React.FC<
   agentRoleConfirmationButtonProps
-> = ({ onProceed, checkedRoles }) => {
+> = ({ onConfirm, checkedRoles, disabled }) => {
+  const handleClick = () => {
+    onConfirm(checkedRoles);
+  };
+
   return (
     <Button
       variant="contained"
-      onClick={() => onProceed(checkedRoles)}
-      disabled={checkedRoles.length === 0}
+      onClick={handleClick}
+      disabled={disabled}
       sx={{
         textTransform: "none",
         backgroundColor: theme.palette.primary.dark,

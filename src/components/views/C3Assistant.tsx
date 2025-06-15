@@ -21,7 +21,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
   const [selectedAgent, setSelectedAgent] = useState<string>("");
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
 
-  const handleProceed = (roles: string[]) => {
+  const handleConfirm = (roles: string[]) => {
     setSelectedRoles(roles);
   };
 
@@ -44,7 +44,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
           key={selectedAgent}
           prompt={roleSelectionPrompt}
           roles={rolesByAgent[selectedAgent]}
-          onProceed={handleProceed}
+          onConfirm={handleConfirm}
         />
       )}
 
