@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 
 interface AgentRolesDisplayProps {
+  timeBetweenCharactersDisplayInMS: number;
   roles: string[];
   selectedRoles: string[];
   onRolesDisplayDone: () => void;
 }
 
 const AgentRolesDisplay: React.FC<AgentRolesDisplayProps> = ({
+  timeBetweenCharactersDisplayInMS,
   roles,
   selectedRoles,
   onRolesDisplayDone,
@@ -30,9 +32,9 @@ const AgentRolesDisplay: React.FC<AgentRolesDisplayProps> = ({
         clearInterval(interval);
         onRolesDisplayDone();
       }
-    }, 15);
+    }, timeBetweenCharactersDisplayInMS);
     return () => clearInterval(interval);
-  }, [rolesDisplayText, onRolesDisplayDone]);
+  }, [rolesDisplayText, onRolesDisplayDone, timeBetweenCharactersDisplayInMS]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>

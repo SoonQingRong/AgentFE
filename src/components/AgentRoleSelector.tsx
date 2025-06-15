@@ -4,12 +4,14 @@ import AgentRoleCheckbox from "./AgentRoleCheckbox";
 import AgentRoleConfirmationButton from "./AgentRoleConfirmButton";
 
 interface AgentRoleSelectorProps {
+  timeBetweenCharactersDisplayInMS: number;
   prompt: string;
   roles: string[];
   onConfirm: (selectedRoles: string[]) => void;
 }
 
 const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
+  timeBetweenCharactersDisplayInMS,
   prompt,
   roles,
   onConfirm,
@@ -28,9 +30,9 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
         clearInterval(interval);
         setTimeout(() => setShowCheckboxes(true), 300); // delay checkboxes
       }
-    }, 15);
+    }, timeBetweenCharactersDisplayInMS);
     return () => clearInterval(interval);
-  }, [prompt]);
+  }, [prompt, timeBetweenCharactersDisplayInMS]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>

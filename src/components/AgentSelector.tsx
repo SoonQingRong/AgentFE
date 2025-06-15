@@ -3,6 +3,7 @@ import { Typography, Box } from "@mui/material";
 import AgentSelectorDropDown from "./AgentSelectorDropdown";
 
 interface AgentSelectorProps {
+  timeBetweenCharactersDisplayInMS: number;
   prompt: string;
   sidebarDelayInSeconds: number;
   agentOptions: string[];
@@ -10,6 +11,7 @@ interface AgentSelectorProps {
 }
 
 const AgentSelector: React.FC<AgentSelectorProps> = ({
+  timeBetweenCharactersDisplayInMS,
   prompt,
   sidebarDelayInSeconds,
   agentOptions,
@@ -33,12 +35,12 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
           clearInterval(interval);
           setTimeout(() => setShowDropdown(true), 300); // delay dropdown
         }
-      }, 15);
+      }, timeBetweenCharactersDisplayInMS);
     }, animationDelay);
     return () => {
       clearTimeout(timeout);
     };
-  }, [prompt, sidebarDelayInSeconds]);
+  }, [prompt, sidebarDelayInSeconds, timeBetweenCharactersDisplayInMS]);
 
   return (
     <Box

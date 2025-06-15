@@ -4,10 +4,13 @@ import AgentSelector from "../AgentSelector";
 import AgentRoleSelector from "../AgentRoleSelector";
 import AgentRolesDisplay from "../AgentRolesDisplay";
 import AgentResponsibilitiesDisplay from "../AgentResponsibilitiesDisplay";
+import AgentToolsDisplay from "../AgentToolsDisplay";
 
 interface C3AssistantProps {
   sidebarDelayInSeconds: number;
 }
+
+const timeBetweenCharactersDisplayInMS: number = 15;
 
 const agentSelectionPrompt = "Hi, please select your agent";
 const agentOptions = ["APG", "MPS", "SAB"];
@@ -20,15 +23,9 @@ const rolesByAgent: Record<string, string[]> = {
 };
 
 const responsibilitiesByRole: Record<string, string[]> = {
-  "APG (L&R)": ["Do APG stuff 1", "Do APG stuff 2"],
-  "APG (PO)": ["Do APG stuff 3", "Do APG stuff 4", "Do APG stuff 5"],
-  "APG (Test)": [
-    "Do APG stuff 6",
-    "Do APG stuff 7",
-    "Do APG stuff 8",
-    "Do APG stuff 9",
-    "Do APG stuff 10",
-  ],
+  "APG (L&R)": ["Do APG stuff 1"],
+  "APG (PO)": ["Do APG stuff 2", "Do APG stuff 3"],
+  "APG (Test)": ["Do APG stuff 4"],
   MPS1: ["Do MPS stuff 1"],
   MPS2: ["Do MPS stuff 2"],
   MPS3: ["Do MPS stuff 3"],
@@ -37,10 +34,25 @@ const responsibilitiesByRole: Record<string, string[]> = {
   SAB3: ["Do SAB stuff 3"],
 };
 
+const toolsByResponsibility: Record<string, string[]> = {
+  "Do APG stuff 1": ["APG API 1"],
+  "Do APG stuff 2": ["APG API 1", "APG API 2"],
+  "Do APG stuff 3": ["APG API 2", "APG API 3"],
+  "Do APG stuff 4": ["APG API 3"],
+  "Do MPS stuff 1": ["MPS API 1"],
+  "Do MPS stuff 2": ["MPS API 2"],
+  "Do MPS stuff 3": ["MPS API 1"],
+  "Do SAB stuff 1": ["SAB API 1"],
+  "Do SAB stuff 2": ["SAB API 2"],
+  "Do SAB stuff 3": ["SAB API 2"],
+};
+
 const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
   const [selectedAgent, setSelectedAgent] = useState<string>("");
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [rolesDisplayDone, setRolesDisplayDone] = useState(false);
+  const [responsibilitiesDisplayDone, setResponsibilitiesDisplayDone] =
+    useState(false);
 
   const handleAgentChange = (agent: string) => {
     setSelectedAgent(agent);
@@ -55,9 +67,14 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
     setRolesDisplayDone(true);
   }, []);
 
+  const handleResponsibilitiesDisplayDone = useCallback(() => {
+    setResponsibilitiesDisplayDone(true);
+  }, []);
+
   useEffect(() => {
     if (selectedRoles.length > 0) {
       setRolesDisplayDone(false);
+      setResponsibilitiesDisplayDone(false);
     }
   }, [selectedRoles]);
 
@@ -67,6 +84,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
         Welcome to C3 Assistant
       </Typography>
       <AgentSelector
+        timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
         prompt={agentSelectionPrompt}
         sidebarDelayInSeconds={sidebarDelayInSeconds}
         agentOptions={agentOptions}
@@ -75,6 +93,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
       {selectedAgent && (
         <AgentRoleSelector
           key={selectedAgent}
+          timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
           prompt={roleSelectionPrompt}
           roles={rolesByAgent[selectedAgent]}
           onConfirm={handleConfirm}
@@ -83,6 +102,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
 
       {selectedRoles.length > 0 && (
         <AgentRolesDisplay
+          timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
           roles={rolesByAgent[selectedAgent]}
           selectedRoles={selectedRoles}
           onRolesDisplayDone={handleRolesDisplayDone}
@@ -91,10 +111,21 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
 
       {rolesDisplayDone && selectedRoles.length > 0 && (
         <AgentResponsibilitiesDisplay
+          timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
           selectedAgent={selectedAgent}
           selectedRoles={selectedRoles}
           rolesByAgent={rolesByAgent}
           responsibilitiesByRole={responsibilitiesByRole}
+          onResponsibilitiesDisplayDone={handleResponsibilitiesDisplayDone}
+        />
+      )}
+
+      {responsibilitiesDisplayDone && selectedRoles.length > 0 && (
+        <AgentToolsDisplay
+          timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
+          selectedRoles={selectedRoles}
+          responsibilitiesByRole={responsibilitiesByRole}
+          toolsByResponsibility={toolsByResponsibility}
         />
       )}
     </Box>

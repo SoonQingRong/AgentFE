@@ -5,7 +5,7 @@ import AboutFrontend from "../components/views/AboutFrontend";
 import APGFrontend from "../components/views/APGFrontend";
 import MPSFrontend from "../components/views/MPSFrontend";
 import SABFrontend from "../components/views/SABFrontend";
-import C3Assistant from "../components/views/C3Assistant";
+import C3AssistantSidebar from "../components/C3AssistantSidebar";
 import theme from "../theme";
 
 const MainPage: React.FC = () => {
@@ -76,22 +76,11 @@ const MainPage: React.FC = () => {
           {tabValue === 3 && <SABFrontend />}
         </Box>
 
-        <Box
-          sx={{
-            background: theme.palette.background.default,
-            border: `1px solid ${theme.palette.primary.main}`,
-            position: "absolute",
-            right: "0px",
-            width: "400px",
-            height: "calc(100% - 58px)", // component height is 48px and margin bottom is 10px
-            transition: `transform ${sidebarDelayInSeconds}s ease-in-out`,
-            transform: sidebarOpen ? "translateX(0)" : "translateX(100%)",
-            zIndex: 1300,
-            overflowY: "auto",
-          }}
-        >
-          <C3Assistant key={agentAssistantKey} sidebarDelayInSeconds={0.5} />
-        </Box>
+        <C3AssistantSidebar
+          sidebarOpen={sidebarOpen}
+          sidebarDelayInSeconds={sidebarDelayInSeconds}
+          agentAssistantKey={agentAssistantKey}
+        />
       </Box>
     </Box>
   );

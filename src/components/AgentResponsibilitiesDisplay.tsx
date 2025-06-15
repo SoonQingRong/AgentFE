@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 
 interface AgentResponsibilitiesDisplayProps {
+  timeBetweenCharactersDisplayInMS: number;
   selectedAgent: string;
   selectedRoles: string[];
   rolesByAgent: Record<string, string[]>;
   responsibilitiesByRole: Record<string, string[]>;
+  onResponsibilitiesDisplayDone: () => void;
 }
 
 const AgentResponsibilitiesDisplay: React.FC<
   AgentResponsibilitiesDisplayProps
 > = ({
+  timeBetweenCharactersDisplayInMS,
   selectedAgent,
   selectedRoles,
   rolesByAgent,
   responsibilitiesByRole,
+  onResponsibilitiesDisplayDone,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
 
@@ -37,14 +41,19 @@ const AgentResponsibilitiesDisplay: React.FC<
       index++;
       if (index >= responsibilitesDisplayText.length) {
         clearInterval(interval);
+        onResponsibilitiesDisplayDone();
       }
-    }, 15);
+    }, timeBetweenCharactersDisplayInMS);
     return () => clearInterval(interval);
-  }, [responsibilitesDisplayText]);
+  }, [
+    responsibilitesDisplayText,
+    onResponsibilitiesDisplayDone,
+    timeBetweenCharactersDisplayInMS,
+  ]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>
-      <Typography variant="h6" gutterBottom sx={{ whiteSpace: "pre-line" }}>
+      <Typography variant="h6" sx={{ whiteSpace: "pre-line" }}>
         {displayedText}
       </Typography>
     </Box>
