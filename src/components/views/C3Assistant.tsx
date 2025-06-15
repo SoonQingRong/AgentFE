@@ -34,10 +34,14 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
         prompt={agentSelectionPrompt}
         sidebarDelayInSeconds={sidebarDelayInSeconds}
         agentOptions={agentOptions}
-        onAgentChange={setSelectedAgent}
+        onAgentChange={(agent) => {
+          setSelectedAgent(agent);
+          setSelectedRoles([]);
+        }}
       />
       {selectedAgent && (
         <AgentRoleSelector
+          key={selectedAgent}
           prompt={roleSelectionPrompt}
           roles={rolesByAgent[selectedAgent]}
           onProceed={handleProceed}

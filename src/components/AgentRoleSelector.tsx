@@ -26,7 +26,7 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
         clearInterval(interval);
         setTimeout(() => setShowCheckboxes(true), 300); // delay dropdown
       }
-    }, 20);
+    }, 15);
     return () => clearInterval(interval);
   }, [prompt]);
 
