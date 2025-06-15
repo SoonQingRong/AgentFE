@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 
-interface AgentRolesAndResponsibilitiesDisplayProps {
+interface AgentResponsibilitiesDisplayProps {
   selectedAgent: string;
-  roles: string[];
   selectedRoles: string[];
   rolesByAgent: Record<string, string[]>;
   responsibilitiesByRole: Record<string, string[]>;
 }
 
-const AgentRolesAndResponsibilitiesDisplay: React.FC<
-  AgentRolesAndResponsibilitiesDisplayProps
+const AgentResponsibilitiesDisplay: React.FC<
+  AgentResponsibilitiesDisplayProps
 > = ({
   selectedAgent,
-  roles,
   selectedRoles,
   rolesByAgent,
   responsibilitiesByRole,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
-
-  const rolesDisplayText = `Role(s) selected: ${roles
-    .filter((role) => selectedRoles.includes(role))
-    .join(", ")}`;
 
   const fullResponsibilitiesText = rolesByAgent[selectedAgent]
     .filter((role) => selectedRoles.includes(role))
@@ -34,22 +28,22 @@ const AgentRolesAndResponsibilitiesDisplay: React.FC<
     .map((line, idx) => `${idx + 1}) ${line}`)
     .join("\n");
 
-  const rolesAndResponsibilitesDisplayText = `${rolesDisplayText}\nResponsibilities:\n${fullResponsibilitiesText}`;
+  const responsibilitesDisplayText = `Responsibilities:\n${fullResponsibilitiesText}`;
 
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
-      setDisplayedText(rolesAndResponsibilitesDisplayText.slice(0, index + 1));
+      setDisplayedText(responsibilitesDisplayText.slice(0, index + 1));
       index++;
-      if (index >= rolesAndResponsibilitesDisplayText.length) {
+      if (index >= responsibilitesDisplayText.length) {
         clearInterval(interval);
       }
     }, 15);
     return () => clearInterval(interval);
-  }, [rolesAndResponsibilitesDisplayText]);
+  }, [responsibilitesDisplayText]);
 
   return (
-    <Box sx={{ padding: "4px" }}>
+    <Box sx={{ padding: "4px", marginTop: "20px" }}>
       <Typography variant="h6" gutterBottom sx={{ whiteSpace: "pre-line" }}>
         {displayedText}
       </Typography>
@@ -57,4 +51,4 @@ const AgentRolesAndResponsibilitiesDisplay: React.FC<
   );
 };
 
-export default AgentRolesAndResponsibilitiesDisplay;
+export default AgentResponsibilitiesDisplay;

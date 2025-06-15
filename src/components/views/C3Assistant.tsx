@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import AgentSelector from "../AgentSelector";
 import AgentRoleSelector from "../AgentRoleSelector";
-import AgentRolesAndResponsibilitiesDisplay from "../AgentRolesAndResponsibilitiesDisplay";
+import AgentRolesDisplay from "../AgentRolesDisplay";
+import AgentResponsibilitiesDisplay from "../AgentResponsibilitiesDisplay";
 
 interface C3AssistantProps {
   sidebarDelayInSeconds: number;
@@ -68,7 +69,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
           onConfirm={handleConfirm}
         />
       )}
-      {/* 
+
       {selectedRoles.length > 0 && (
         <AgentRolesDisplay
           roles={rolesByAgent[selectedAgent]}
@@ -79,16 +80,6 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
       {selectedRoles.length > 0 && (
         <AgentResponsibilitiesDisplay
           selectedAgent={selectedAgent}
-          selectedRoles={selectedRoles}
-          rolesByAgent={rolesByAgent}
-          responsibilitiesByRole={responsibilitiesByRole}
-        />
-      )} */}
-
-      {selectedRoles.length > 0 && (
-        <AgentRolesAndResponsibilitiesDisplay
-          selectedAgent={selectedAgent}
-          roles={rolesByAgent[selectedAgent]}
           selectedRoles={selectedRoles}
           rolesByAgent={rolesByAgent}
           responsibilitiesByRole={responsibilitiesByRole}

@@ -8,7 +8,7 @@ import SABFrontend from "../components/views/SABFrontend";
 import C3Assistant from "../components/views/C3Assistant";
 import theme from "../theme";
 
-const MainPage2: React.FC = () => {
+const MainPage: React.FC = () => {
   const tabs = [
     { label: "About", value: 0 },
     { label: "APG", value: 1 },
@@ -97,4 +97,4 @@ const MainPage2: React.FC = () => {
   );
 };
 
-export default MainPage2;
+export default MainPage;
