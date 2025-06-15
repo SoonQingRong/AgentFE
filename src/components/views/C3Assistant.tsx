@@ -13,11 +13,7 @@ interface C3AssistantProps {
 
 const timeBetweenCharactersDisplayInMS: number = 10;
 
-// const agentSelectionPrompt = "Hi, please select your agent";
-const agentSelectionPrompt =
-  "Lorem ipsum dolor sit amet. Sit iusto asperiores a odit tempora ea nesciunt quas ut officia voluptates qui distinctio internos qui reprehenderit atque qui alias minus. Qui quos earum in galisum inventore eum tenetur saepe et obcaecati vitae qui soluta cupiditate et accusantium iusto ea necessitatibus quae." +
-  "Et quia consequuntur aut labore enim et molestiae dolor et architecto nihil et labore vero ea sint corporis. Est similique natus eos veritatis voluptates ut eaque nisi et voluptatum magni a possimus adipisci sed voluptatem perferendis et natus galisum." +
-  "Sed expedita quia et delectus quasi nam tenetur facilis qui recusandae fugiat eos blanditiis minima. Qui ducimus velit aut eaque ipsa et tempore enim sed aspernatur maiores est voluptas voluptatum in voluptatem explicabo. Et facere dignissimos est quis alias aut nihil illum ut aspernatur neque et cumque corporis. Rem odio voluptas eos facilis dolorum non quia consectetur.";
+const agentSelectionPrompt = "Hi, please select your agent";
 const agentOptions = ["APG", "MPS", "SAB"];
 
 const roleSelectionPrompt = "Please select your role(s)";
