@@ -50,7 +50,12 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
 
       {selectedRoles.length > 0 && (
         <Box sx={{ marginTop: "20px" }}>
-          <Typography>Roles: {selectedRoles.join(", ")}</Typography>
+          <Typography>
+            Roles:{" "}
+            {rolesByAgent[selectedAgent]
+              .filter((role) => selectedRoles.includes(role))
+              .join(", ")}
+          </Typography>
         </Box>
       )}
     </Box>
