@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import AgentSelector from "../AgentSelector";
 import AgentRoleSelector from "../AgentRoleSelector";
@@ -40,6 +40,7 @@ const responsibilitiesByRole: Record<string, string[]> = {
 const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
   const [selectedAgent, setSelectedAgent] = useState<string>("");
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [rolesDisplayDone, setRolesDisplayDone] = useState(false);
 
   const handleAgentChange = (agent: string) => {
     setSelectedAgent(agent);
@@ -49,6 +50,16 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
   const handleConfirm = (roles: string[]) => {
     setSelectedRoles(roles);
   };
+
+  const handleRolesDisplayDone = useCallback(() => {
+    setRolesDisplayDone(true);
+  }, []);
+
+  useEffect(() => {
+    if (selectedRoles.length > 0) {
+      setRolesDisplayDone(false);
+    }
+  }, [selectedRoles]);
 
   return (
     <Box sx={{ padding: "10px" }}>
@@ -74,10 +85,11 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
         <AgentRolesDisplay
           roles={rolesByAgent[selectedAgent]}
           selectedRoles={selectedRoles}
+          onRolesDisplayDone={handleRolesDisplayDone}
         />
       )}
 
-      {selectedRoles.length > 0 && (
+      {rolesDisplayDone && selectedRoles.length > 0 && (
         <AgentResponsibilitiesDisplay
           selectedAgent={selectedAgent}
           selectedRoles={selectedRoles}

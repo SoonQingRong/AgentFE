@@ -4,11 +4,13 @@ import { Box, Typography } from "@mui/material";
 interface AgentRolesDisplayProps {
   roles: string[];
   selectedRoles: string[];
+  onRolesDisplayDone: () => void;
 }
 
 const AgentRolesDisplay: React.FC<AgentRolesDisplayProps> = ({
   roles,
   selectedRoles,
+  onRolesDisplayDone,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
 
@@ -26,10 +28,11 @@ const AgentRolesDisplay: React.FC<AgentRolesDisplayProps> = ({
       index++;
       if (index >= rolesDisplayText.length) {
         clearInterval(interval);
+        onRolesDisplayDone();
       }
     }, 15);
     return () => clearInterval(interval);
-  }, [rolesDisplayText]);
+  }, [rolesDisplayText, onRolesDisplayDone]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>
