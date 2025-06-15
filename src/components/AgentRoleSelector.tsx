@@ -17,6 +17,7 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
   const [displayedText, setDisplayedText] = useState("");
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
+  const [checkedRoles, setCheckedRoles] = useState<string[]>([]);
 
   useEffect(() => {
     let index = 0;
@@ -25,13 +26,11 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
       index++;
       if (index >= prompt.length) {
         clearInterval(interval);
-        setTimeout(() => setShowCheckboxes(true), 300); // delay dropdown
+        setTimeout(() => setShowCheckboxes(true), 300); // delay checkboxes
       }
     }, 15);
     return () => clearInterval(interval);
   }, [prompt]);
-
-  const [checkedRoles, setCheckedRoles] = useState<string[]>([]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>
