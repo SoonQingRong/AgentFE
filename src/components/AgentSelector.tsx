@@ -4,6 +4,7 @@ import AgentSelectorDropDown from "./AgentSelectorDropdown";
 
 interface AgentSelectorProps {
   timeBetweenCharactersDisplayInMS: number;
+  onComponentUpdate: () => void;
   prompt: string;
   sidebarDelayInSeconds: number;
   agentOptions: string[];
@@ -12,6 +13,7 @@ interface AgentSelectorProps {
 
 const AgentSelector: React.FC<AgentSelectorProps> = ({
   timeBetweenCharactersDisplayInMS,
+  onComponentUpdate,
   prompt,
   sidebarDelayInSeconds,
   agentOptions,
@@ -31,6 +33,9 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
       const interval = setInterval(() => {
         setDisplayedText(prompt.slice(0, index + 1));
         index++;
+        if (onComponentUpdate) {
+          onComponentUpdate();
+        }
         if (index >= prompt.length) {
           clearInterval(interval);
           setTimeout(() => setShowDropdown(true), 300); // delay dropdown
@@ -40,7 +45,12 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [prompt, sidebarDelayInSeconds, timeBetweenCharactersDisplayInMS]);
+  }, [
+    prompt,
+    sidebarDelayInSeconds,
+    timeBetweenCharactersDisplayInMS,
+    onComponentUpdate,
+  ]);
 
   return (
     <Box
@@ -56,6 +66,7 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
       {showDropdown && (
         <Box>
           <AgentSelectorDropDown
+            onComponentUpdate={onComponentUpdate}
             agentOptions={agentOptions}
             onAgentChange={onAgentChange}
           />

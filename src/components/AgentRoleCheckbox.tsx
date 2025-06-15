@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormControlLabel, Checkbox } from "@mui/material";
 import theme from "../theme";
 
 interface agentRoleCheckboxProps {
+  onComponentUpdate: () => void;
   role: string;
   checkedRoles: string[];
   setCheckedRoles: React.Dispatch<React.SetStateAction<string[]>>;
@@ -10,6 +11,7 @@ interface agentRoleCheckboxProps {
 }
 
 const AgentRoleCheckbox: React.FC<agentRoleCheckboxProps> = ({
+  onComponentUpdate,
   role,
   checkedRoles,
   setCheckedRoles,
@@ -20,6 +22,12 @@ const AgentRoleCheckbox: React.FC<agentRoleCheckboxProps> = ({
       prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role]
     );
   };
+
+  useEffect(() => {
+    if (onComponentUpdate) {
+      onComponentUpdate();
+    }
+  }, [onComponentUpdate]);
 
   return (
     <FormControlLabel

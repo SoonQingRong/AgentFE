@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 interface AgentResponsibilitiesDisplayProps {
   timeBetweenCharactersDisplayInMS: number;
+  onComponentUpdate: () => void;
   selectedAgent: string;
   selectedRoles: string[];
   rolesByAgent: Record<string, string[]>;
@@ -14,6 +15,7 @@ const AgentResponsibilitiesDisplay: React.FC<
   AgentResponsibilitiesDisplayProps
 > = ({
   timeBetweenCharactersDisplayInMS,
+  onComponentUpdate,
   selectedAgent,
   selectedRoles,
   rolesByAgent,
@@ -39,6 +41,9 @@ const AgentResponsibilitiesDisplay: React.FC<
     const interval = setInterval(() => {
       setDisplayedText(responsibilitesDisplayText.slice(0, index + 1));
       index++;
+      if (onComponentUpdate) {
+        onComponentUpdate();
+      }
       if (index >= responsibilitesDisplayText.length) {
         clearInterval(interval);
         onResponsibilitiesDisplayDone();
@@ -49,6 +54,7 @@ const AgentResponsibilitiesDisplay: React.FC<
     responsibilitesDisplayText,
     onResponsibilitiesDisplayDone,
     timeBetweenCharactersDisplayInMS,
+    onComponentUpdate,
   ]);
 
   return (

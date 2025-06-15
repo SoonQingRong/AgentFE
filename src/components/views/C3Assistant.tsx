@@ -8,11 +8,16 @@ import AgentToolsDisplay from "../AgentToolsDisplay";
 
 interface C3AssistantProps {
   sidebarDelayInSeconds: number;
+  onComponentUpdate: () => void;
 }
 
-const timeBetweenCharactersDisplayInMS: number = 15;
+const timeBetweenCharactersDisplayInMS: number = 10;
 
-const agentSelectionPrompt = "Hi, please select your agent";
+// const agentSelectionPrompt = "Hi, please select your agent";
+const agentSelectionPrompt =
+  "Lorem ipsum dolor sit amet. Sit iusto asperiores a odit tempora ea nesciunt quas ut officia voluptates qui distinctio internos qui reprehenderit atque qui alias minus. Qui quos earum in galisum inventore eum tenetur saepe et obcaecati vitae qui soluta cupiditate et accusantium iusto ea necessitatibus quae." +
+  "Et quia consequuntur aut labore enim et molestiae dolor et architecto nihil et labore vero ea sint corporis. Est similique natus eos veritatis voluptates ut eaque nisi et voluptatum magni a possimus adipisci sed voluptatem perferendis et natus galisum." +
+  "Sed expedita quia et delectus quasi nam tenetur facilis qui recusandae fugiat eos blanditiis minima. Qui ducimus velit aut eaque ipsa et tempore enim sed aspernatur maiores est voluptas voluptatum in voluptatem explicabo. Et facere dignissimos est quis alias aut nihil illum ut aspernatur neque et cumque corporis. Rem odio voluptas eos facilis dolorum non quia consectetur.";
 const agentOptions = ["APG", "MPS", "SAB"];
 
 const roleSelectionPrompt = "Please select your role(s)";
@@ -47,7 +52,10 @@ const toolsByResponsibility: Record<string, string[]> = {
   "Do SAB stuff 3": ["SAB API 2"],
 };
 
-const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
+const C3Assistant: React.FC<C3AssistantProps> = ({
+  sidebarDelayInSeconds,
+  onComponentUpdate,
+}) => {
   const [selectedAgent, setSelectedAgent] = useState<string>("");
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [rolesDisplayDone, setRolesDisplayDone] = useState(false);
@@ -85,6 +93,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
       </Typography>
       <AgentSelector
         timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
+        onComponentUpdate={onComponentUpdate}
         prompt={agentSelectionPrompt}
         sidebarDelayInSeconds={sidebarDelayInSeconds}
         agentOptions={agentOptions}
@@ -94,6 +103,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
         <AgentRoleSelector
           key={selectedAgent}
           timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
+          onComponentUpdate={onComponentUpdate}
           prompt={roleSelectionPrompt}
           roles={rolesByAgent[selectedAgent]}
           onConfirm={handleConfirm}
@@ -103,6 +113,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
       {selectedRoles.length > 0 && (
         <AgentRolesDisplay
           timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
+          onComponentUpdate={onComponentUpdate}
           roles={rolesByAgent[selectedAgent]}
           selectedRoles={selectedRoles}
           onRolesDisplayDone={handleRolesDisplayDone}
@@ -112,6 +123,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
       {rolesDisplayDone && selectedRoles.length > 0 && (
         <AgentResponsibilitiesDisplay
           timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
+          onComponentUpdate={onComponentUpdate}
           selectedAgent={selectedAgent}
           selectedRoles={selectedRoles}
           rolesByAgent={rolesByAgent}
@@ -123,6 +135,7 @@ const C3Assistant: React.FC<C3AssistantProps> = ({ sidebarDelayInSeconds }) => {
       {responsibilitiesDisplayDone && selectedRoles.length > 0 && (
         <AgentToolsDisplay
           timeBetweenCharactersDisplayInMS={timeBetweenCharactersDisplayInMS}
+          onComponentUpdate={onComponentUpdate}
           selectedRoles={selectedRoles}
           responsibilitiesByRole={responsibilitiesByRole}
           toolsByResponsibility={toolsByResponsibility}

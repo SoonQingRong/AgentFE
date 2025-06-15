@@ -31,7 +31,7 @@ const MainPage: React.FC = () => {
 
   const handleSidebarClick = () => {
     if (!sidebarOpen) {
-      setAgentAssistantKey((prev) => prev + 1); // triggers reset and remount
+      setAgentAssistantKey((prev) => prev + 1);
     }
     setSidebarOpen((prev) => !prev);
   };

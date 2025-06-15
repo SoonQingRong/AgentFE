@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import theme from "../theme";
 import C3Assistant from "./views/C3Assistant";
@@ -14,8 +14,29 @@ const C3AssistantSidebar: React.FC<C3AssistantSidebarProps> = ({
   sidebarDelayInSeconds,
   agentAssistantKey,
 }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleComponentUpdate = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [agentAssistantKey, sidebarOpen]);
+
   return (
     <Box
+      ref={scrollRef}
       sx={{
         background: theme.palette.background.default,
         border: `1px solid ${theme.palette.primary.main}`,
@@ -32,6 +53,7 @@ const C3AssistantSidebar: React.FC<C3AssistantSidebarProps> = ({
       <C3Assistant
         key={agentAssistantKey}
         sidebarDelayInSeconds={sidebarDelayInSeconds}
+        onComponentUpdate={handleComponentUpdate}
       />
     </Box>
   );

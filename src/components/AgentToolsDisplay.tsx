@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 interface AgentToolsDisplayProps {
   timeBetweenCharactersDisplayInMS: number;
+  onComponentUpdate: () => void;
   selectedRoles: string[];
   responsibilitiesByRole: Record<string, string[]>;
   toolsByResponsibility: Record<string, string[]>;
@@ -10,6 +11,7 @@ interface AgentToolsDisplayProps {
 
 const AgentToolsDisplay: React.FC<AgentToolsDisplayProps> = ({
   timeBetweenCharactersDisplayInMS,
+  onComponentUpdate,
   selectedRoles,
   responsibilitiesByRole,
   toolsByResponsibility,
@@ -37,12 +39,15 @@ const AgentToolsDisplay: React.FC<AgentToolsDisplayProps> = ({
     const interval = setInterval(() => {
       setDisplayedText(toolsDisplayText.slice(0, index + 1));
       index++;
+      if (onComponentUpdate) {
+        onComponentUpdate();
+      }
       if (index >= toolsDisplayText.length) {
         clearInterval(interval);
       }
     }, timeBetweenCharactersDisplayInMS);
     return () => clearInterval(interval);
-  }, [toolsDisplayText, timeBetweenCharactersDisplayInMS]);
+  }, [toolsDisplayText, timeBetweenCharactersDisplayInMS, onComponentUpdate]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>

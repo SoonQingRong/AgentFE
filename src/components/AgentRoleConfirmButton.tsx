@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { Button } from "@mui/material";
 import theme from "../theme";
 
 interface agentRoleConfirmationButtonProps {
+  onComponentUpdate: () => void;
   onConfirm: (selectedRoles: string[]) => void;
   checkedRoles: string[];
   disabled: boolean;
@@ -9,10 +11,16 @@ interface agentRoleConfirmationButtonProps {
 
 const AgentRoleConfirmationButton: React.FC<
   agentRoleConfirmationButtonProps
-> = ({ onConfirm, checkedRoles, disabled }) => {
+> = ({ onComponentUpdate, onConfirm, checkedRoles, disabled }) => {
   const handleClick = () => {
     onConfirm(checkedRoles);
   };
+
+  useEffect(() => {
+    if (onComponentUpdate) {
+      onComponentUpdate();
+    }
+  }, [onComponentUpdate]);
 
   return (
     <Button

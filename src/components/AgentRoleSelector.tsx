@@ -5,6 +5,7 @@ import AgentRoleConfirmationButton from "./AgentRoleConfirmButton";
 
 interface AgentRoleSelectorProps {
   timeBetweenCharactersDisplayInMS: number;
+  onComponentUpdate: () => void;
   prompt: string;
   roles: string[];
   onConfirm: (selectedRoles: string[]) => void;
@@ -12,6 +13,7 @@ interface AgentRoleSelectorProps {
 
 const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
   timeBetweenCharactersDisplayInMS,
+  onComponentUpdate,
   prompt,
   roles,
   onConfirm,
@@ -21,18 +23,26 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
   const [buttonClicked, setButtonClicked] = useState(false);
   const [checkedRoles, setCheckedRoles] = useState<string[]>([]);
 
+  const handleConfirm = (roles: string[]) => {
+    setButtonClicked(true);
+    onConfirm(roles);
+  };
+
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
       setDisplayedText(prompt.slice(0, index + 1));
       index++;
+      if (onComponentUpdate) {
+        onComponentUpdate();
+      }
       if (index >= prompt.length) {
         clearInterval(interval);
         setTimeout(() => setShowCheckboxes(true), 300); // delay checkboxes
       }
     }, timeBetweenCharactersDisplayInMS);
     return () => clearInterval(interval);
-  }, [prompt, timeBetweenCharactersDisplayInMS]);
+  }, [prompt, timeBetweenCharactersDisplayInMS, onComponentUpdate]);
 
   return (
     <Box sx={{ padding: "4px", marginTop: "20px" }}>
@@ -44,6 +54,7 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
         <Box>
           {roles.map((role) => (
             <AgentRoleCheckbox
+              onComponentUpdate={onComponentUpdate}
               key={role}
               role={role}
               checkedRoles={checkedRoles}
@@ -57,10 +68,8 @@ const AgentRoleSelector: React.FC<AgentRoleSelectorProps> = ({
       {showCheckboxes && (
         <Box sx={{ marginTop: "10px" }}>
           <AgentRoleConfirmationButton
-            onConfirm={(roles) => {
-              setButtonClicked(true);
-              onConfirm(roles);
-            }}
+            onComponentUpdate={onComponentUpdate}
+            onConfirm={handleConfirm}
             checkedRoles={checkedRoles}
             disabled={checkedRoles.length === 0 || buttonClicked}
           />

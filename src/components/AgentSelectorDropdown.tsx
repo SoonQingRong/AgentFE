@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuItem,
   Select,
@@ -7,12 +7,15 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import theme from "../theme";
+
 interface AgentSelectorDropdownProps {
+  onComponentUpdate: () => void;
   agentOptions: string[];
   onAgentChange: (agent: string) => void;
 }
 
 const AgentSelectorDropDown: React.FC<AgentSelectorDropdownProps> = ({
+  onComponentUpdate,
   agentOptions,
   onAgentChange,
 }) => {
@@ -23,6 +26,12 @@ const AgentSelectorDropDown: React.FC<AgentSelectorDropdownProps> = ({
     setAgent(selectedAgent);
     onAgentChange(selectedAgent);
   };
+
+  useEffect(() => {
+    if (onComponentUpdate) {
+      onComponentUpdate();
+    }
+  }, [onComponentUpdate]);
 
   return (
     <FormControl fullWidth>
