@@ -14,12 +14,12 @@ interface AgentSelectorDropdownProps {
 
 const AgentSelectorDropDown: React.FC<AgentSelectorDropdownProps> = ({
   agentOptions,
-  onAgentChange
+  onAgentChange,
 }) => {
   const [agent, setAgent] = useState<string>("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    const selectedAgent = event.target.value as string
+    const selectedAgent = event.target.value as string;
     setAgent(selectedAgent);
     onAgentChange(selectedAgent);
   };
@@ -53,6 +53,9 @@ const AgentSelectorDropDown: React.FC<AgentSelectorDropdownProps> = ({
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.secondary.main,
           }, //when dropdown activated
+          "& .MuiSvgIcon-root": {
+            color: theme.palette.primary.light,
+          },
         }}
         MenuProps={{
           PaperProps: {
