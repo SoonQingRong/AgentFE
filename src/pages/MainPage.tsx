@@ -87,6 +87,7 @@ const MainPage2: React.FC = () => {
             transition: `transform ${sidebarDelayInSeconds}s ease-in-out`,
             transform: sidebarOpen ? "translateX(0)" : "translateX(100%)",
             zIndex: 1300,
+            overflowY: "auto",
           }}
         >
           <C3Assistant key={agentAssistantKey} sidebarDelayInSeconds={0.5} />
