@@ -27,7 +27,7 @@ const AgentToolsDisplay: React.FC<AgentToolsDisplayProps> = ({
     });
   });
 
-  const tools = Array.from(toolSet);
+  const tools = Array.from(toolSet).sort((a, b) => a.localeCompare(b));
   const toolsDisplayText =
     `Tool(s):\n` +
     tools.map((tool, index) => `${index + 1}) ${tool}`).join("\n");
